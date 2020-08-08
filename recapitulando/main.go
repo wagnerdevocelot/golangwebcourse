@@ -13,6 +13,16 @@ type agenteScreto struct {
 	licençaParaMatar bool
 }
 
+// a interface humano recebe implicitamente todos os tipos que utilizam o metodo falar
+type humano interface {
+	falar()
+}
+
+// agora quando a interface é passada como argumento numa função que chama a função falar = linha 52
+func dizalgo(h humano) {
+	h.falar()
+}
+
 // declaração  global com zero value
 var y int // zerio value de int é 0 é de um bool é um false e de um string é uma string vazia
 
@@ -37,7 +47,12 @@ func main() {
 	// então falar é uma função e também um metodo, e metodos podem ser encadeados tbm com uma chain
 	p1.falar()
 	// chamada do novo metodo
-	agente.horademata()
+	agente.falar()
+
+	// você tem polimorfismo com dois tipos que implementam a interface humano usando a mesma função
+	// de maniras particulares a cada tipo
+	dizalgo(p1)
+	dizalgo(agente)
 }
 
 // funcções além de argumentos e retorno possuem receivers que podem ser dados customizados
@@ -46,7 +61,7 @@ func (p pessoa) falar() {
 	fmt.Println(p.nome)
 }
 
-func (as agenteScreto) horademata() {
+func (as agenteScreto) falar() {
 	fmt.Println(as.nome, `diz, "minha licença é true, ovo mata oce" `)
 }
 
