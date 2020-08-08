@@ -8,6 +8,11 @@ type pessoa struct {
 	idade int
 }
 
+type agenteScreto struct {
+	pessoa
+	licençaParaMatar bool
+}
+
 // declaração  global com zero value
 var y int // zerio value de int é 0 é de um bool é um false e de um string é uma string vazia
 
@@ -18,16 +23,31 @@ func main() {
 		29,
 	}
 
-	fmt.Println(p1)
+	// composição atraves de tipos de dados customizados
+	agente := agenteScreto{
+		pessoa{
+			"James Bond",
+			49,
+		},
+		true,
+	}
+
+	fmt.Println(agente)
 
 	// então falar é uma função e também um metodo, e metodos podem ser encadeados tbm com uma chain
 	p1.falar()
+	// chamada do novo metodo
+	agente.horademata()
 }
 
 // funcções além de argumentos e retorno possuem receivers que podem ser dados customizados
 // todos os dados de pessoa ficam disponiveis dentro da função que tem um receiver desse tipo
 func (p pessoa) falar() {
 	fmt.Println(p.nome)
+}
+
+func (as agenteScreto) horademata() {
+	fmt.Println(as.nome, `diz, "minha licença é true, ovo mata oce" `)
 }
 
 func variables() {
