@@ -19,6 +19,15 @@ func main() {
 	}
 
 	fmt.Println(p1)
+
+	// então falar é uma função e também um metodo, e metodos podem ser encadeados tbm com uma chain
+	p1.falar()
+}
+
+// funcções além de argumentos e retorno possuem receivers que podem ser dados customizados
+// todos os dados de pessoa ficam disponiveis dentro da função que tem um receiver desse tipo
+func (p pessoa) falar() {
+	fmt.Println(p.nome)
 }
 
 func variables() {
